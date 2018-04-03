@@ -1,14 +1,19 @@
-import cli_argv_parser
+import cap
+import time
 
 
 config = {
-    'long-keys': 'value',
+    'long-keys': 'allow',
+    'none-value': 'N',
+    'delay': 0
 }
 
-Parser = cli_argv_parser.Cli_Argv_Parser(config)
+Parser = cap.cap(config)
+print(Parser.getArgs())
 
-print(Parser.getArgv())
-x, y, z = Parser.getArgv()
+temp = time.time()
+x, y, z = Parser.getArgs()
+time = time.time() - temp
 
 args = 'Arguments:\n'
 keys = 'Keys:\n'
@@ -24,3 +29,4 @@ for i in z:
     long_keys += i + '\n'
 
 print('\n' + args + '\n' + keys + '\n' + long_keys)
+print('\n\n' + 'Total time: ' + str(long(time)))
