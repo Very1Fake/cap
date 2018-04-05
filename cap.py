@@ -1,3 +1,5 @@
+# Version 1.0.0a3
+
 import sys
 import time
 
@@ -28,6 +30,11 @@ class cap:
                 pass
         except KeyError:
             config['delay'] = 0
+        try:
+            if not config['keys-limit']:
+                pass
+        except KeyError:
+            config['keys-limit'] = -1
 
         return config
 
@@ -43,6 +50,7 @@ class cap:
         if self.config['long-keys-values'] == 'allow':
             long_keys = {}
         keys = []
+        keys_left = self.config['keys-limit']
         args = []
         z = 0
 
@@ -64,7 +72,9 @@ class cap:
                 elif string[z][:1] == '-':
                     temp = list(string[z][1:])
                     for n in temp:
-                        keys.append(n)
+                        if keys_left > 0 or keys_left < 0:
+                            keys_left -= 1
+                            keys.append(n)
                 else:
                     args.append(string[z])
             except IndexError:
