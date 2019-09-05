@@ -1,2 +1,2 @@
-# cli-argv-parser
-Command Line arguments parser for python
+# terminal-arg-parser
+Terminal arguments parser for python
